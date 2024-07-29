@@ -25,6 +25,7 @@ function createConfirmButton(newCategoryNameField, newCategoryDiv) {
         var categoryName = newCategoryNameField.value;
         if (categoryName === "") {
             alert("O nome da categoria não pode ser vazio");
+            newCategoryDiv.remove();
             return;
         }
     });
@@ -42,6 +43,15 @@ function createCancelButton(newCategoryDiv) {
     return button;
 }
 
+function createRemoveButton(parentElement) {
+    var removeButton = document.createElement("button");
+    removeButton.className = "remove_button";
+    removeButton.addEventListener("click", function() {
+        parentElement.remove();
+    });
+    return removeButton;
+}
+
 
 // Função para inserir a categoria na lista de categorias
 function insertCategory(newCategoryNameField, newCategoryDiv, categoryName) {
@@ -49,8 +59,16 @@ function insertCategory(newCategoryNameField, newCategoryDiv, categoryName) {
     newCategoryDiv.removeChild(newCategoryDiv.querySelector(".category__buttons"));
 
     var categoryTitle = document.createElement("h2");
-    categoryTitle.className = "category__name";
+    categoryTitle.className = "category__header__name";
     categoryTitle.innerHTML = categoryName;
+
+    var removeButton = createRemoveButton(newCategoryDiv);
+
+    var headerCategoryDiv = document.createElement("div");
+    headerCategoryDiv.className = "category__header";
+
+    headerCategoryDiv.appendChild(categoryTitle);
+    headerCategoryDiv.appendChild(removeButton);
 
     var taskList = document.createElement("ul");
     taskList.className = "list";
@@ -64,8 +82,7 @@ function insertCategory(newCategoryNameField, newCategoryDiv, categoryName) {
         addTask(taskList);
     });
 
-
-    newCategoryDiv.appendChild(categoryTitle);
+    newCategoryDiv.appendChild(headerCategoryDiv);
     newCategoryDiv.appendChild(taskList);
     newCategoryDiv.appendChild(newTaskButton);
 }
@@ -101,7 +118,13 @@ function addTask(taskList){
     taskInput.type = "text";
     taskInput.placeholder = "Insira o título da tarefa";
     taskInput.className = "input_field";
-    taskInput.autofocus = true;
+    taskInput.focus();
+
+    taskInput.addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            confirmButton.click();
+        }
+    });
 
     var taskButtonsDiv = document.createElement("div");
     taskButtonsDiv.className = "task__buttons";
@@ -113,6 +136,10 @@ function addTask(taskList){
     var cancelButton = document.createElement("button");
     cancelButton.className = "cancel";
     cancelButton.innerHTML = '<img src="assets/cancel.png" alt="Cancelar">';
+
+    cancelButton.addEventListener("click", function() {
+        newTask.remove();
+    });
 
     taskButtonsDiv.appendChild(confirmButton);
     taskButtonsDiv.appendChild(cancelButton);
@@ -132,24 +159,29 @@ function addTask(taskList){
         taskButtonsDiv.removeChild(confirmButton);
         taskButtonsDiv.removeChild(cancelButton);
 
-
         var taskNameElement = document.createElement("h3");
         taskNameElement.innerHTML = taskName;
+        taskNameElement.style.cursor = "pointer";
+
+        taskNameElement.addEventListener("click", function() {
+            newTaskDiv.classList.toggle("strikethrough");
+        });
+
         
         var editButton = document.createElement("button");
-        editButton.innerHTML = '<img src="assets/edit_black.png" alt="Editar a tarefa">';
+        editButton.className = "edit_button";
 
-        var deleteButton = document.createElement("button");
-        deleteButton.innerHTML = '<img src="assets/delete_black.png" alt="Deletar a tarefa">';
+        var deleteButton = createRemoveButton(newTask);
 
         taskButtonsDiv.appendChild(editButton);
         taskButtonsDiv.appendChild(deleteButton);
 
         newTaskDiv.appendChild(taskNameElement);
-        newTaskDiv.appendChild(taskButtonsDiv);
+        newTaskDiv.appendChild(editButton);
     
         newTask.appendChild(newTaskDiv);
-
+        newTask.appendChild(deleteButton);
+        as
         taskList.appendChild(newTask);
     });
 

@@ -73,14 +73,29 @@ html, body {
     background-image: url('../assets/add_blue.png');
 }
 
-.categories_section{
-    
-    /*display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    gap: 10px;
-    margin-top: 1rem;*/
-    
+@keyframes strike-through {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+.strikethrough {
+    position: relative;
+    opacity: 0.6;
+}
+
+.strikethrough::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    height: 2px;
+    background-color: #b51500;
+    width: 0;
+    animation: strike-through 0.5s forwards;
 }
 
 .category {
@@ -98,34 +113,25 @@ html, body {
 
 }
 
-.category__name {
-    width: calc(100% - 22px);
-    padding: 0.5rem;
+.category__header{
+    display: flex;
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 0 1rem; 
     border: 1px solid #ddd;
     border-radius: 5px;
     box-shadow: 0 0 2px #222831;
+
+}
+
+.category__header__name {
+    width: calc(100% - 22px);
+    padding: 0.5rem;
     font-family: 'Ubuntu', sans-serif;
     font-size: 15px;
     font-weight: 400;
     text-align: center;
-    margin-bottom: 0.5rem;
-    position: relative; /* Necessário para posicionar o ::after */
 }
-
-.category__name::after {
-    content: '';
-    display: inline-block;
-    background-image: url('../assets/delete_black.png'); /* Substitua pelo caminho do seu ícone */
-    background-size: cover;
-    width: 20px; /* Ajuste conforme necessário */
-    height: 20px; /* Ajuste conforme necessário */
-    position: absolute;
-    right: 10px; /* Ajuste a posição do ícone */
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer; /* Indica que é clicável */
-}
-
 
 .category__buttons {
     display: flex;
@@ -133,13 +139,15 @@ html, body {
     margin-top: 10px;
 }
 
-
 .task_content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-right: 1rem;
+    padding-right: 0.5rem;
     background-color: #eeeeee;
+    border: 2px solid #00ADB5;
+    border-radius: 5px;
+    width: 100%;
 }
 
 

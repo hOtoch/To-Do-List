@@ -47,10 +47,46 @@
     flex-direction: column;
     gap: 10px;
     margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 
 .list li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:5px;
     color: #393E46;
-    border: 1px solid #00ADB5;
-    border-radius: 5px;
+    
+}
+
+.edit_button{
+    background-size: cover;
+    width: 15px; 
+    height: 15px; 
+    border: none; 
+    cursor: pointer;
+    background-image: url('../assets/edit_black.png'); 
+    margin-left: auto; 
+}
+
+.edit_button:hover{
+    width: 20px;
+    height: 20px;
+    background-image: url('../assets/edit_blue.png');
+}
+
+.remove_button{
+    background-size: cover;
+    width: 15px; 
+    height: 15px; 
+    border: none; 
+    cursor: pointer;
+    background-image: url('../assets/delete_black.png'); 
+    margin-left: auto; 
+}
+
+.remove_button:hover{
+    width: 20px;
+    height: 20px;
+    background-image: url('../assets/delete_blue.png');
 }
