@@ -1,0 +1,11 @@
+# Fazer função para remover uma categoria
+
+# Ao nao escrever nada na categoria cancelar a ação de criação de categoria
+
+# Fazer função de cancelar a criação de um li quando clicado
+
+# Fazer função para category onde ao ser clicado ira ficar marcado como resolvido
+
+# Terminar o header
+
+# 
